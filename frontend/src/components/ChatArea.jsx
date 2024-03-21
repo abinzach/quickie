@@ -95,7 +95,7 @@ export function ChatArea({
                 How can I help you today?
               </motion.div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 w-full lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full lg:grid-cols-2 gap-2">
               {randomPrompts.map((prompt, index) => (
                 <AnimatePresence>
                 <motion.div
@@ -104,7 +104,7 @@ export function ChatArea({
                   animate={{ scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, staggerChildren: 0.1 }}
-                  className="text-sm p-4 cursor-pointer transition-all duration-300 hover:shadow-md rounded-lg border border-gray-200"
+                  className="text-sm lg:p-4 p-3 cursor-pointer transition-all duration-300 hover:shadow-md rounded-lg border border-gray-200"
                   onClick={() => handlePrompt(prompt.heading, prompt.addition)} // Send the combined heading and addition when clicked
                 >
                   <div className="font-semibold">{prompt.heading}</div>

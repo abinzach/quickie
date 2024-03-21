@@ -43,7 +43,7 @@ function ChatApp() {
         setConversationalMemoryLength={setConversationalMemoryLength}
       />
       <div className="flex-1 flex flex-col">
-        <h1 className="text-3xl poppins p-5 px-5 font-semibold">Quickie</h1>
+        <h1 onClick={()=>window.location.reload()} className="text-3xl poppins p-5 px-5 cursor-pointer font-semibold">Quickie</h1>
         <ChatArea
           chatHistory={chatHistory}
           loading={loading}
