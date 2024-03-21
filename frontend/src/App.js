@@ -16,7 +16,7 @@ function ChatApp() {
     if (userQuestion) {
       setLoading(true); // Set loading state to true when sending a message
       try {
-        const response = await axios.post("http://localhost:5000/api/chat", {
+        const response = await axios.post("https://quickie-backend.onrender.com/api/chat", {
           userQuestion,
         });
         const message = { author: "You", content: userQuestion };
