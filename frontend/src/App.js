@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./components/SideBar";
 import { ChatArea } from "./components/ChatArea";
@@ -12,17 +12,38 @@ function ChatApp() {
     useState(10);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("trying");
+
+      try {
+        const response = await axios.get(
+          "https://quickie-backend.onrender.com"
+        );
+        console.log("response", response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleSend = async () => {
     if (userQuestion) {
       setLoading(true); // Set loading state to true when sending a message
       try {
-        const response = await axios.post("https://quickie-backend.onrender.com/api/chat", {
-          userQuestion,
-        });
+        const response = await axios.post(
+          "https://quickie-backend.onrender.com/api/chat",
+          {
+            userQuestion,
+          }
+        );
+        console.log(response);
         const message = { author: "You", content: userQuestion };
         const aiResponse = {
           author: "Quickie",
-          content: response.data.response,
+          content: response.data.content,
         };
         setChatHistory([...chatHistory, message, aiResponse]);
         setUserQuestion("");
@@ -43,7 +64,12 @@ function ChatApp() {
         setConversationalMemoryLength={setConversationalMemoryLength}
       />
       <div className="flex-1 flex flex-col">
-        <h1 onClick={()=>window.location.reload()} className="text-3xl poppins p-5 px-5 cursor-pointer font-semibold">Quickie</h1>
+        <h1
+          onClick={() => window.location.reload()}
+          className="text-3xl poppins p-5 px-5 cursor-pointer font-semibold"
+        >
+          Quickie
+        </h1>
         <ChatArea
           chatHistory={chatHistory}
           loading={loading}
