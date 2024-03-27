@@ -3,38 +3,42 @@ import axios from "axios";
 import Sidebar from "./components/SideBar";
 import { ChatArea } from "./components/ChatArea";
 import { MessageInput } from "./components/MessageInput";
+import { BackendLoading } from "./components/BackendLoading";
 
 function ChatApp() {
   const [userQuestion, setUserQuestion] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [model, setModel] = useState("mixtral-8x7b-32768");
+  const [backendLoading, setBackendLoading] = useState(true);
   const [conversationalMemoryLength, setConversationalMemoryLength] =
     useState(10);
   const [loading, setLoading] = useState(false);
-
+//https://quickie-backend.onrender
   useEffect(() => {
     const fetchData = async () => {
-      console.log("trying");
+    
 
       try {
         const response = await axios.get(
-          "https://quickie-backend.onrender.com"
+          "https://quickie-backend.onrender/"
         );
         console.log("response", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      }finally {
+        setBackendLoading(false); // Update loading state when request completes (success or failure)
       }
     };
 
     fetchData();
-  }, []);
+  }, [backendLoading]);
 
   const handleSend = async () => {
     if (userQuestion) {
       setLoading(true); // Set loading state to true when sending a message
       try {
         const response = await axios.post(
-          "https://quickie-backend.onrender.com/api/chat",
+          "https://quickie-backend.onrender/api/chat",
           {
             userQuestion,
           }
@@ -54,7 +58,9 @@ function ChatApp() {
       }
     }
   };
-
+  if (backendLoading) {
+    return <BackendLoading/>
+  }
   return (
     <div className="flex h-screen ">
       <Sidebar
