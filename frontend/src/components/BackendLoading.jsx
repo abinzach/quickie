@@ -6,10 +6,6 @@ export const BackendLoading = () => {
     <div className="relative flex justify-center items-center h-screen bg-black">
       <div className="absolute inset-0 bg-black/10 backdrop-blur-2xl"></div>
       <div className="relative z-10 text-center">
-        <h3 className="text-xs px-10 font-medium text-white/50  md:text-sm  mb-1">
-          You have two free credits available. Spend them wisely with each
-          search.
-        </h3>
         <h3 className=" font-medium text-white/70 sm:text-lg md:text-xl lg:text-2xl mb-3 animate-pulse">
           Please wait while we spin up our servers...
         </h3>
